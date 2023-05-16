@@ -2,6 +2,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Main {
+    private static int[] arr;
+    private static int x;
+
     public static void main(String[] args) {
 
         // 1) Reverse a String
@@ -142,13 +145,13 @@ public class Main {
 
         System.out.println();
         System.out.println("Print Fibonacci series using recursion");
-        // 11) Static method below
+        // 11) Print Fibonacci series using recursion --> Static method below
         int number = 10;
         System.out.println(fibonacci(number));
 
         System.out.println();
         System.out.println("Factorial of an Integer");
-        // 12) Static method below
+        // 12) Get Factorial of an Integer --> Static method below
         System.out.println(factorial(15));
 
         System.out.println();
@@ -171,7 +174,72 @@ public class Main {
          * it means the element is not in the list */
         int[] newArray = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91}; // target = 23
 
+        int binNumber = Arrays.binarySearch(newArray, 56);
+        if (binNumber == -1) System.out.println("Element is not in array.");
+        else System.out.println("Element is at index: " + binNumber);
 
+        System.out.println();
+        System.out.println("Find second highest number");
+        // 15) Find second-largest number in an array using the array above --> Static method below
+        System.out.println(findSecondHighest(newArray));
+
+        System.out.println();
+        System.out.println("Remove all occurrences of a given character from input string");
+        // 16) Remove all occurrences of a given character from a string
+        String str1 = "Australia";
+        str1 = str1.toLowerCase().replace("a", "");
+        System.out.println(str1);
+
+        System.out.println();
+        System.out.println("Showcase inheritance");
+        // 17) Showcase inheritance with the help of a program
+        Cat cat = new Cat();
+        cat.colour = "orange"; // Inherited from the Animal Class
+        cat.meow();
+        System.out.println(cat.colour);
+
+        System.out.println();
+        System.out.println("Explain overloading and overriding");
+        // 18) Explain overloading and overriding with the help of a program
+        // Overriding: a class has more than one method with the same name and different params
+        CalculateSquare obj = new CalculateSquare();
+        obj.square();
+        System.out.println("Square with integer argument: " + obj.square(2));
+        System.out.println("Square with float argument: " + obj.square(150.0F));
+
+        System.out.println();
+
+        // Overriding: a child has the same method as the parent class
+        // --> allows Java to accept polymorphism at runtime
+        Bank sbiBank = new SBI();
+        Bank bmoBank = new BMO();
+        Bank rbcBank = new RBC();
+        System.out.println("SBI Rate of Interest: " + sbiBank.getRateOfInterest());
+        System.out.println("BMO Rate of Interest: " + bmoBank.getRateOfInterest());
+        System.out.println("RBC Rate of Interest: " + rbcBank.getRateOfInterest());
+
+        System.out.println();
+        System.out.println("Check if a number is Prime");
+        // 19) Check if a given number is prime
+        /* 3 requirements:
+                        a) Number cannot be 0 or 1
+                        b) Number 2 is a Prime number
+                        c) If Number is indivisible by other numbers, it is Prime
+
+           Static Method Below
+         */
+        System.out.println(isPrime(2));
+        System.out.println(isPrime(3));
+        System.out.println(isPrime(91));
+
+        System.out.println();
+        System.out.println("Summing elements in an array");
+        // 20) How to sum all elements in an array
+        int sum = 0;
+        for (int g : newArray) {
+            sum += g;
+        }
+        System.out.println("The sum of the elements in the array is: " + sum);
     }
 
     public static int fibonacci(int n) {
@@ -183,4 +251,33 @@ public class Main {
         if (n == 1) return 1;
         return (n * factorial(n - 1));
     }
+
+    public static int findSecondHighest(int[] array) {
+        int highest = Integer.MIN_VALUE;
+        int secondHighest = Integer.MIN_VALUE;
+
+        for (int i : array) {
+            if (i > highest) {
+                secondHighest = highest;
+                highest = i;
+            } else if (i > secondHighest) {
+                secondHighest = i;
+            }
+        }
+        return secondHighest;
+    }
+
+    public static boolean isPrime(int n) {
+        if (n == 0 || n == 1)
+            return false;
+        if (n == 2)
+            return true;
+        for (int i = 2; i <= n / 2; i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
